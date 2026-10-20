@@ -27,6 +27,12 @@ const PATHS: Record<string, string> = {
   bell: 'M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0',
   shield: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
   card: 'M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zM2 10h20',
+  food: 'M4 3v8a3 3 0 0 0 6 0V3M7 3v18M17 3c-2 2-3 4-3 7h3v11',
+  bus: 'M5 17V6a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v11H5zM5 11h14M8 21v-4M16 21v-4M8 14h.01M16 14h.01',
+  bag: 'M5 8h14l-1 13H6zM9 8V6a3 3 0 0 1 6 0v2',
+  users: 'M16 21v-2a4 4 0 0 0-8 0v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.9M2 21v-2a4 4 0 0 1 3-3.9',
+  cap: 'M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5M22 9v6',
+  dot: 'M12 12h.01',
 };
 
 export function Icon({ name, size = 18 }: { name: string; size?: number }) {
@@ -352,5 +358,5 @@ export function Sheet({ title, onClose, children }: { title: string; onClose: ()
 }
 
 export const CATEGORY_ICON: Record<string, string> = {
-  tuition: '🎓', rent: '🏠', food: '🍜', transport: '🚇', bills: '🧾', shopping: '🛍️', family: '👪', fx: '💱', income: '⬇️', other: '•',
+  tuition: 'cap', rent: 'home', food: 'food', transport: 'bus', bills: 'bill', shopping: 'bag', family: 'users', fx: 'swap', income: 'down', other: 'dot',
 };

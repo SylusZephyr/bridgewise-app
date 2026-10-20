@@ -14,7 +14,7 @@ export function TxRow({ t }: { t: Json }) {
   const incoming = !String(t.amount).startsWith('-');
   return (
     <div className="tx">
-      <span className="emoji" aria-hidden="true">{CATEGORY_ICON[t.category] ?? '•'}</span>
+      <span className={`tx-icon cat-${t.category}`} aria-hidden="true"><Icon name={CATEGORY_ICON[t.category] ?? 'dot'} size={17} /></span>
       <div style={{ minWidth: 0 }}>
         <div style={{ fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t.description}</div>
         <div className="faint small">{new Date(t.at).toLocaleString(undefined, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })} · <span style={{ textTransform: 'capitalize' }}>{t.category}</span></div>
@@ -216,7 +216,7 @@ export function Budget(ctx: Ctx) {
           {b.length === 0 && <p className="muted small">No budgets yet.</p>}
           {b.map((x) => (
             <div key={x.category} style={{ padding: '.55rem 0' }}>
-              <div className="row between small"><span style={{ textTransform: 'capitalize', fontWeight: 600 }}>{CATEGORY_ICON[x.category]} {x.category}</span>
+              <div className="row between small"><span style={{ textTransform: 'capitalize', fontWeight: 600 }}>{x.category}</span>
                 <span className="num">{money(x.spent)} / {money(x.limit, x.currency)}</span></div>
               <div className={`bar ${x.over ? 'over' : ''}`} style={{ marginTop: '.35rem' }}><span style={{ width: `${Math.min(100, x.percent)}%` }} /></div>
               {x.over && <div className="small" style={{ color: 'var(--bad)', marginTop: '.2rem' }}>Over by {money(String(x.remaining).replace('-', ''), x.currency)}</div>}

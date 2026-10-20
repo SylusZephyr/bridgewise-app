@@ -28,26 +28,26 @@ const fmtDate = (iso: string) => new Date(iso).toLocaleDateString(undefined, { d
 
 /* ------------------------------------------------------------- onboarding */
 
-const PERSONAS = [
-  { id: 'pk-cn', label: 'From Pakistan, studying in China', home: 'PKR', study: 'CNY', },
-  { id: 'in-cn', label: 'From India, studying in China', home: 'INR', study: 'CNY', },
-  { id: 'cn-uk', label: 'From China, studying in the UK', home: 'CNY', study: 'GBP', },
-  { id: 'pk-us', label: 'From Pakistan, studying in the US', home: 'PKR', study: 'USD', },
+const CCY_NAME: Record<string, string> = { CNY: 'Chinese yuan', PKR: 'Pakistani rupee', INR: 'Indian rupee', GBP: 'British pound', USD: 'US dollar', EUR: 'Euro', AUD: 'Australian dollar', CAD: 'Canadian dollar', JPY: 'Japanese yen', KRW: 'Korean won', AED: 'UAE dirham' };
+
+const COUNTRIES: Array<[string, string]> = [
+  ['Pakistan', 'PKR'], ['India', 'INR'], ['China', 'CNY'], ['United Kingdom', 'GBP'], ['United States', 'USD'],
+  ['Euro area', 'EUR'], ['Australia', 'AUD'], ['Canada', 'CAD'], ['Japan', 'JPY'], ['South Korea', 'KRW'], ['United Arab Emirates', 'AED'],
 ];
 
 export function Onboarding({ onDone }: { onDone: () => void }) {
   const [mode, setMode] = useState<'signup' | 'signin'>('signup');
-  const [form, setForm] = useState({ name: '', email: '', password: '', homeCurrency: 'PKR', studyCurrency: 'CNY', });
-  const [persona, setPersona] = useState('pk-cn');
+  const [form, setForm] = useState({ name: '', email: '', password: '', homeCurrency: 'PKR', studyCurrency: 'CNY' });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
+  const set = (k: string, val: string) => setForm((f) => ({ ...f, [k]: val }));
+  const signup = mode === 'signup';
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true); setError(null);
     try {
-      const r = mode === 'signup'
+      const r = signup
         ? await api('/api/auth/signup', { method: 'POST', body: JSON.stringify({ ...form, name: form.name.trim() || 'Student' }) })
         : await api('/api/auth/signin', { method: 'POST', body: JSON.stringify({ email: form.email, password: form.password }) });
       try { localStorage.setItem('bw-name', r.name ?? form.name); } catch { /* private mode */ }
@@ -56,67 +56,50 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
   }
 
   return (
-    <div className="onboard">
-      <section className="onboard-hero">
+    <div className="auth">
+      <section className="auth-brand">
         <div className="logo" style={{ padding: 0 }}><span className="logo-mark">BW</span> BridgeWise</div>
-        <h1>Your money, across borders, handled.</h1>
-        <p>One account for every currency you live in — linked to Alipay, WeChat Pay, your bank cards and your bank back home. An AI assistant that reads your tuition invoices, watches exchange rates, builds your credit in China and prepares every payment — and never moves money without your approval.</p>
-        <div className="features">
-          {[
-            ['wallet', 'CNY, PKR, INR, GBP, USD and more — valued at live ECB rates'],
-            ['card', 'Link Alipay 支付宝, WeChat Pay 微信支付, UnionPay and Visa cards, CCB, ICBC and BOC'],
-            ['bill', 'Paste a tuition invoice; the assistant sets up the payment and protects your living money'],
-            ['shield', 'Every action is a card you approve. The assistant cannot execute anything.'],
-          ].map(([i, t]) => (
-            <div className="feature" key={t}><span><Icon name={i!} size={15} /></span><span>{t}</span></div>
-          ))}
+        <div className="auth-pitch">
+          <h1>Your money, across borders, handled.</h1>
+          <p>The money account for international students: every currency you live in, paid in and out through Alipay and your bank card, with an AI assistant that prepares every payment and never moves money without you.</p>
         </div>
+        <ul className="auth-points">
+          <li><Icon name="wallet" size={18} /><span><b>Multi-currency wallet</b> valued at live exchange rates</span></li>
+          <li><Icon name="send" size={18} /><span><b>Real payments</b> through Alipay and card networks</span></li>
+          <li><Icon name="shield" size={18} /><span><b>You approve every action</b>, confirmed with your password</span></li>
+        </ul>
+        <p className="auth-foot">Payments by Alipay and Stripe · Exchange rates from the European Central Bank</p>
       </section>
-      <section className="onboard-form">
-        <form className="card stack" onSubmit={submit}>
-          <div className="seg" role="group" aria-label="Account">
-            <button type="button" aria-pressed={mode === 'signup'} onClick={() => setMode('signup')}>Create account</button>
-            <button type="button" aria-pressed={mode === 'signin'} onClick={() => setMode('signin')}>Sign in</button>
+      <section className="auth-panel">
+        <form className="auth-card" onSubmit={submit}>
+          <div>
+            <h2>{signup ? 'Create your account' : 'Welcome back'}</h2>
+            <p className="muted">{signup ? 'It takes a minute. Your wallet starts empty.' : 'Sign in to your BridgeWise account.'}</p>
           </div>
+          {signup && <div><label htmlFor="nm">Your first name</label><input id="nm" value={form.name} onChange={(e) => set('name', e.target.value)} autoComplete="given-name" required /></div>}
           <div><label htmlFor="em">Email</label><input id="em" type="email" autoComplete="email" value={form.email} onChange={(e) => set('email', e.target.value)} required /></div>
-          <div><label htmlFor="pw">Password</label><input id="pw" type="password" autoComplete={mode === 'signup' ? 'new-password' : 'current-password'} value={form.password} onChange={(e) => set('password', e.target.value)} required />
-            {mode === 'signup' && <p className="hint">At least 8 characters, with letters and a number.</p>}</div>
-          {mode === 'signup' && (
-            <>
-              <div><label htmlFor="nm">Your first name</label><input id="nm" value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Ali" autoComplete="given-name" /></div>
-              <div className="stack" style={{ gap: '.45rem' }}>
-                {PERSONAS.map((p) => (
-                  <button type="button" key={p.id} className="persona" aria-pressed={persona === p.id}
-                    onClick={() => { setPersona(p.id); setForm((f) => ({ ...f, homeCurrency: p.home, studyCurrency: p.study })); }}>
-                    <span className="row" style={{ gap: '.5rem' }}><CcyBadge ccy={p.home} /> → <CcyBadge ccy={p.study} /> <span>{p.label}</span></span>
-                  </button>
-                ))}
-              </div>
-              <div className="field-row">
-                <div>
-                  <label htmlFor="hc">Home currency</label>
-                  <div className="pair">
-                    <select id="hc" value={form.homeCurrency} onChange={(e) => set('homeCurrency', e.target.value)}>
-                      {CURRENCIES.map((c) => <option key={c}>{c}</option>)}
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="sc">Currency where you study</label>
-                  <div className="pair">
-                    <select id="sc" value={form.studyCurrency} onChange={(e) => set('studyCurrency', e.target.value)}>
-                      {CURRENCIES.map((c) => <option key={c}>{c}</option>)}
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </>
+          <div><label htmlFor="pw">Password</label><input id="pw" type="password" autoComplete={signup ? 'new-password' : 'current-password'} value={form.password} onChange={(e) => set('password', e.target.value)} required />
+            {signup && <p className="hint">At least 8 characters, with letters and a number.</p>}</div>
+          {signup && (
+            <div className="field-row">
+              <div><label htmlFor="hc">Home country</label>
+                <select id="hc" value={form.homeCurrency} onChange={(e) => set('homeCurrency', e.target.value)}>
+                  {COUNTRIES.map(([n, c]) => <option key={n} value={c}>{n} · {c}</option>)}
+                </select></div>
+              <div><label htmlFor="sc">Country of study</label>
+                <select id="sc" value={form.studyCurrency} onChange={(e) => set('studyCurrency', e.target.value)}>
+                  {COUNTRIES.map(([n, c]) => <option key={n} value={c}>{n} · {c}</option>)}
+                </select></div>
+            </div>
           )}
           {error && <div className="notice error" role="alert">{error}</div>}
-          <button className="btn" disabled={busy} style={{ justifyContent: 'center' }}>
-            {busy ? 'Please wait…' : mode === 'signup' ? 'Create my account' : 'Sign in'}
+          <button className="btn auth-submit" disabled={busy}>
+            {busy ? 'Please wait…' : signup ? 'Create my account' : 'Sign in'}
           </button>
-          <p className="faint small">Your wallet starts empty. Add money with Alipay or a bank card.</p>
+          <p className="auth-switch">
+            {signup ? 'Already have an account?' : 'New to BridgeWise?'}{' '}
+            <button type="button" className="link" onClick={() => { setMode(signup ? 'signin' : 'signup'); setError(null); }}>{signup ? 'Sign in' : 'Create an account'}</button>
+          </p>
         </form>
       </section>
     </div>
@@ -151,7 +134,7 @@ export function Home({ data, ask, approve, decline, approving, go, sheet }: Ctx)
           <div className="stack" style={{ gap: '.55rem' }}>
             {(w.pockets as Json[]).map((p) => (
               <div key={p.id} className="row between">
-                <span className="row" style={{ gap: '.55rem' }}><CcyBadge ccy={p.currency} /><span>{p.currency}</span></span>
+                <span className="row" style={{ gap: '.55rem' }}><CcyBadge ccy={p.currency} /><span>{CCY_NAME[p.currency] ?? p.currency}</span></span>
                 <span style={{ textAlign: 'right' }}>
                   <strong className="num">{money(p.balance)}</strong>
                   {p.currency !== w.displayCurrency && p.valueInDisplay && <div className="faint small num">≈ {money(p.valueInDisplay, w.displayCurrency)}</div>}

@@ -62,10 +62,11 @@ try {
   await caption('BridgeWise', 'One account for every currency an international student lives in, run by an AI assistant');
   await pause(3500);
   await caption('Step 1 · Create an account', 'Email and password; the password is stored as a salted scrypt hash');
+  await typeSlow(page.getByLabel('Your first name'), 'Ayesha');
   await typeSlow(page.getByLabel('Email'), EMAIL);
   await typeSlow(page.getByLabel('Password'), PASSWORD);
-  await typeSlow(page.getByLabel('Your first name'), 'Ayesha');
-  await page.getByRole('button', { name: 'From Pakistan, studying in China' }).click();
+  await page.getByLabel('Home country').selectOption('PKR');
+  await page.getByLabel('Country of study').selectOption('CNY');
   await caption('Step 1 · Create an account', 'A student from Pakistan studying in China: money from home in PKR, life in CNY');
   await pause(2000);
   await page.getByRole('button', { name: 'Create my account' }).click();

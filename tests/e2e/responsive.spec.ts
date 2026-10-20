@@ -6,7 +6,6 @@ test('on a phone: onboarding, home and the tab bar fit with no sideways scroll',
   await page.getByLabel('Email').fill(`e2e-${Date.now()}-${Math.random().toString(36).slice(2, 8)}@example.test`);
   await page.getByLabel('Password').fill('testpass123');
   await page.getByLabel('Your first name').fill('Ayesha');
-  await page.getByRole('button', { name: 'From Pakistan, studying in China' }).click();
   await page.getByRole('button', { name: 'Create my account' }).click();
   await expect(page.getByRole('heading', { name: /, Ayesha$/ })).toBeVisible();
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);

@@ -13,7 +13,8 @@ async function open(page: Page, name = 'Wei') {
   await page.getByLabel('Password').fill('testpass123');
   await page.getByLabel('Your first name').fill(name);
   // These scenarios were written for a CNY-home, GBP-study student.
-  await page.getByRole('button', { name: 'From China, studying in the UK' }).click();
+  await page.getByLabel('Home country').selectOption('CNY');
+  await page.getByLabel('Country of study').selectOption('GBP');
   await page.getByRole('button', { name: 'Create my account' }).click();
   await expect(page.getByRole('heading', { name: new RegExp(`, ${name}$`) })).toBeVisible();
   // Wallets start empty; fund this one the way a top-up would.

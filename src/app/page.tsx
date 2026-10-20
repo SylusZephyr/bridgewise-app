@@ -140,9 +140,11 @@ ${r.budgetNote}` : ''), steps: r.steps, proposals: r.proposals, mode: r.mode }])
             </button>
           ))}
         </div>
-        <button className="btn secondary small" style={{ margin: '0 .5rem' }} onClick={async () => { await api('/api/auth/signout', { method: 'POST', body: '{}' }).catch(() => {}); setChat([]); setData(null); setState('onboard'); }}>
-          Sign out{data?.user?.email ? ` · ${data.user.email}` : ''}
-        </button>
+        <div className="side-account">
+          <span className="avatar-sm" aria-hidden="true">{(name || 'S').slice(0, 1).toUpperCase()}</span>
+          <div className="side-account-id"><strong>{name}</strong><span>{data?.user?.email ?? ''}</span></div>
+          <button className="link small" onClick={async () => { await api('/api/auth/signout', { method: 'POST', body: '{}' }).catch(() => {}); setChat([]); setData(null); setState('onboard'); }}>Sign out</button>
+        </div>
         <div className="side-foot">
           <Icon name="shield" size={13} /> Every action is approved by you. Rates: ECB and live provider quotes. Balances held in BridgeWise&rsquo;s own ledger.
         </div>
