@@ -27,3 +27,4 @@ secrets/
 .env.*
 !.env.example
 walkthrough/
+scripts/promo/out/

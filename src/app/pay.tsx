@@ -23,7 +23,14 @@ export function AlipayCheckout({ onError }: { onError: (m: string) => void }) {
     e.preventDefault(); setBusy(true);
     try {
       const r = await api('/api/pay/alipay', { method: 'POST', body: JSON.stringify({ amount }) });
-      window.location.href = r.payUrl;
+      // Submit Alipay's own signed form; its script is not run, we submit it ourselves.
+      const doc = new DOMParser().parseFromString(r.formHtml, 'text/html');
+      const form = doc.querySelector('form');
+      if (!form) throw new Error('Alipay did not return a checkout form');
+      const live = document.importNode(form, true) as HTMLFormElement;
+      live.style.display = 'none';
+      document.body.appendChild(live);
+      live.submit();
     } catch (x: any) { onError(x.message); setBusy(false); }
   }
   return (

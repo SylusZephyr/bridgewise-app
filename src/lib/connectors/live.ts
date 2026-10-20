@@ -93,7 +93,9 @@ export async function createAlipayTopUp(db: Db, session: ResolvedSession, amount
   if (minor <= 0n) throw new AppError('VALIDATION_FAILED', 'amount must be above zero');
   const outTradeNo = tradeNo();
   await db.insert(externalPayments).values({ sessionId: session.id, provider: 'alipay', outTradeNo, currency: 'CNY', amountMinor: minor });
-  const url = alipay().pageExecute('alipay.trade.page.pay', 'GET', {
+  // POST form, as Alipay documents for website payments: the long GET URL is
+  // intermittently answered with a 404 by the sandbox gateway.
+  const formHtml = alipay().pageExecute('alipay.trade.page.pay', 'POST', {
     bizContent: {
       out_trade_no: outTradeNo,
       product_code: 'FAST_INSTANT_TRADE_PAY',
@@ -104,7 +106,7 @@ export async function createAlipayTopUp(db: Db, session: ResolvedSession, amount
     notifyUrl: `${origin}/api/pay/alipay/notify`,
   });
   await appendAudit(db, { sessionId: session.id, correlationId: outTradeNo, type: 'alipay.created', actor: 'user', outcome: 'allowed', payload: { amount } });
-  return { outTradeNo, payUrl: url };
+  return { outTradeNo, formHtml };
 }
 
 /** Asks Alipay what happened. Credits only on TRADE_SUCCESS / TRADE_FINISHED. */

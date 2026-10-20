@@ -13,7 +13,7 @@ const csp = [
   "connect-src 'self' https://api.stripe.com",
   "frame-src https://js.stripe.com https://hooks.stripe.com",
   "frame-ancestors 'none'",
-  "form-action 'self'",
+  "form-action 'self' https://openapi-sandbox.dl.alipaydev.com https://openapi.alipay.com https://*.alipaydev.com https://*.alipay.com",
   "base-uri 'none'",
   "object-src 'none'",
   "worker-src 'self'",
