@@ -1,151 +1,141 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>BridgeWise promo</title>
 <style>
-  :root { --navy:#070d1c; --ink:#f6f7fb; --blue:#2f6bff; --violet:#7c4dff; --cyan:#3fd0ff; --ok:#3ccf91; --muted:#9fb0d6; }
+  :root { --navy:#05091a; --ink:#f6f7fb; --blue:#2f6bff; --violet:#7c4dff; --cyan:#3fd0ff; --ok:#3ccf91; --muted:#9fb0d6; }
   * { box-sizing:border-box; margin:0; }
   html,body { width:1920px; height:1080px; overflow:hidden; background:var(--navy); color:var(--ink); font-family:'Segoe UI Variable Display','Segoe UI',system-ui,sans-serif; }
   #bg { position:absolute; inset:0; overflow:hidden; }
-  .blob { position:absolute; border-radius:50%; filter:blur(90px); opacity:.55; animation:drift 14s ease-in-out infinite alternate; }
-  .b1 { width:900px; height:900px; background:#1d3fbf; left:-200px; top:-250px; }
-  .b2 { width:800px; height:800px; background:#5a2fd6; right:-250px; bottom:-300px; animation-delay:-5s; }
-  .b3 { width:500px; height:500px; background:#0b8fc9; left:45%; top:55%; opacity:.3; animation-delay:-9s; }
-  @keyframes drift { to { transform:translate(140px,80px) scale(1.15); } }
-  #grid { position:absolute; inset:-100px; background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px); background-size:80px 80px; animation:pan 30s linear infinite; mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent); }
+  .blob { position:absolute; border-radius:50%; filter:blur(110px); opacity:.6; animation:drift 12s ease-in-out infinite alternate; }
+  .b1 { width:1000px; height:1000px; background:#1d3fbf; left:-250px; top:-300px; }
+  .b2 { width:900px; height:900px; background:#5a2fd6; right:-300px; bottom:-350px; animation-delay:-4s; }
+  .b3 { width:600px; height:600px; background:#0b8fc9; left:42%; top:52%; opacity:.35; animation-delay:-8s; }
+  @keyframes drift { to { transform:translate(180px,90px) scale(1.18); } }
+  #grid { position:absolute; inset:-100px; background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px); background-size:80px 80px; animation:pan 8s linear infinite; mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent); }
   @keyframes pan { to { transform:translate(80px,80px); } }
-  .scene { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; opacity:0; }
-  .scene.in { animation:sceneIn .7s cubic-bezier(.2,.8,.2,1) forwards; }
-  .scene.out { animation:sceneOut .55s ease forwards; }
-  @keyframes sceneIn { from { opacity:0; transform:scale(1.04); filter:blur(8px);} to { opacity:1; transform:none; filter:none; } }
-  @keyframes sceneOut { to { opacity:0; transform:scale(.97); filter:blur(6px);} }
-  .word { display:inline-block; opacity:0; transform:translateY(40px); animation:up .7s cubic-bezier(.2,.8,.2,1) forwards; }
+  #bar { position:absolute; left:0; top:0; height:6px; background:linear-gradient(90deg,var(--cyan),var(--violet)); width:0; }
+  .scene { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; will-change:opacity,transform; }
+  .word { display:inline-block; opacity:0; transform:translateY(60px) scale(.96); animation:up .55s cubic-bezier(.15,.9,.2,1) forwards; }
+  .slam { display:inline-block; opacity:0; transform:scale(1.8); animation:slam .45s cubic-bezier(.2,.9,.2,1) forwards; }
   @keyframes up { to { opacity:1; transform:none; } }
-  .big { font-size:118px; font-weight:800; letter-spacing:-4px; line-height:1.02; text-align:center; }
-  .grad { color:#e4ebff; }
-  .grad .word, b.grad { background:linear-gradient(90deg,#8fb0ff,#ffffff 45%,#c6b4ff); -webkit-background-clip:text; background-clip:text; color:transparent; padding-bottom:.08em; }
-  .eyebrow { font-size:26px; letter-spacing:8px; text-transform:uppercase; color:var(--cyan); font-weight:700; margin-bottom:28px; opacity:0; animation:up .6s .1s forwards; }
-  .sub { font-size:36px; color:var(--muted); margin-top:28px; opacity:0; animation:up .7s .6s forwards; text-align:center; }
-  /* pain */
-  .pains { display:grid; grid-template-columns:repeat(2,560px); gap:28px; }
-  .pain { padding:38px 44px; border-radius:26px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); font-size:46px; font-weight:700; opacity:0; transform:translateY(30px) scale(.96); animation:pop .6s cubic-bezier(.2,.9,.3,1.3) forwards; backdrop-filter:blur(10px); }
-  .pain span { display:block; font-size:24px; font-weight:500; color:var(--muted); margin-top:8px; }
-  @keyframes pop { to { opacity:1; transform:none; } }
-  /* logo */
-  .mark { width:220px; height:220px; border-radius:58px; background:linear-gradient(135deg,#5b8cff,#7c4dff); display:grid; place-items:center; font-size:92px; font-weight:900; box-shadow:0 30px 120px rgba(91,140,255,.55); transform:scale(0) rotate(-20deg); animation:logo 1s cubic-bezier(.2,1.4,.3,1) forwards; }
+  @keyframes slam { 60% { opacity:1; } to { opacity:1; transform:none; } }
+  .big { font-size:128px; font-weight:850; letter-spacing:-5px; line-height:1; text-align:center; }
+  .hot { color:#ff6b6b; }
+  .gradw .word, .gradw .slam, b.grad { background:linear-gradient(90deg,#8fb0ff,#ffffff 45%,#c6b4ff); -webkit-background-clip:text; background-clip:text; color:transparent; padding-bottom:.08em; }
+  .eyebrow { font-size:26px; letter-spacing:10px; text-transform:uppercase; color:var(--cyan); font-weight:800; margin-bottom:34px; opacity:0; animation:up .5s .05s forwards; }
+  .mark { width:220px; height:220px; border-radius:58px; background:none; display:grid; place-items:center; font-size:92px; font-weight:900; box-shadow:0 30px 140px rgba(91,140,255,.65); transform:scale(0) rotate(-25deg); animation:logo .8s cubic-bezier(.2,1.5,.3,1) forwards; }
   @keyframes logo { to { transform:none; } }
-  .ring { position:absolute; width:220px; height:220px; border-radius:50%; border:3px solid rgba(143,176,255,.6); animation:ring 1.6s .3s ease-out forwards; opacity:0; }
-  @keyframes ring { 0% { opacity:.9; transform:scale(.6);} 100% { opacity:0; transform:scale(4);} }
-  .name { font-size:150px; font-weight:900; letter-spacing:-6px; margin-top:40px; }
+  .ring { position:absolute; width:220px; height:220px; border-radius:50%; border:4px solid rgba(143,176,255,.7); animation:ring 1.2s .15s ease-out forwards; opacity:0; }
+  @keyframes ring { 0% { opacity:1; transform:scale(.6);} 100% { opacity:0; transform:scale(5);} }
+  .name { font-size:160px; font-weight:900; letter-spacing:-7px; margin-top:40px; }
   /* agent */
-  .agent { display:grid; grid-template-columns:780px 640px; gap:60px; align-items:center; }
-  .chat { background:rgba(10,18,40,.75); border:1px solid rgba(255,255,255,.12); border-radius:30px; padding:34px; box-shadow:0 40px 120px rgba(0,0,0,.45); }
-  .chat-h { display:flex; gap:16px; align-items:center; font-size:28px; font-weight:700; margin-bottom:24px; }
-  .av { width:52px; height:52px; border-radius:16px; background:linear-gradient(135deg,#5b8cff,#7c4dff); display:grid; place-items:center; font-size:26px; }
-  .msg { font-size:27px; padding:18px 24px; border-radius:20px; margin:10px 0; opacity:0; animation:up .5s forwards; max-width:90%; }
+  .agent { display:grid; grid-template-columns:860px 600px; gap:70px; align-items:center; }
+  .chat { background:rgba(8,15,36,.82); border:1px solid rgba(255,255,255,.14); border-radius:32px; padding:36px; box-shadow:0 40px 140px rgba(0,0,0,.55); }
+  .chat-h { display:flex; gap:16px; align-items:center; font-size:30px; font-weight:800; margin-bottom:24px; }
+  .av { width:56px; height:56px; border-radius:16px; background:linear-gradient(135deg,#5b8cff,#7c4dff); display:grid; place-items:center; font-size:28px; }
+  .live { margin-left:auto; font-size:20px; font-weight:700; color:var(--ok); display:flex; align-items:center; gap:8px; }
+  .live::before { content:''; width:12px; height:12px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 0 rgba(60,207,145,.7); animation:beat 1s infinite; }
+  @keyframes beat { to { box-shadow:0 0 0 14px rgba(60,207,145,0); } }
+  .msg { font-size:28px; padding:18px 24px; border-radius:20px; margin:12px 0; opacity:0; animation:up .45s forwards; max-width:92%; }
   .msg.user { background:var(--blue); margin-left:auto; }
-  .msg.bot { background:rgba(255,255,255,.07); }
-  .call { font-family:'Cascadia Code',Consolas,monospace; font-size:24px; display:flex; align-items:center; gap:14px; padding:12px 18px; margin:8px 0; border-radius:14px; background:rgba(63,208,255,.08); border:1px solid rgba(63,208,255,.25); opacity:0; transform:translateX(-30px); animation:slide .45s forwards; }
+  .msg.bot { background:rgba(255,255,255,.08); }
+  .call { font-family:'Cascadia Code',Consolas,monospace; font-size:25px; display:flex; align-items:center; gap:14px; padding:13px 18px; margin:9px 0; border-radius:14px; background:rgba(63,208,255,.08); border:1px solid rgba(63,208,255,.3); opacity:0; transform:translateX(-40px); animation:slide .35s cubic-bezier(.2,.9,.2,1) forwards; }
   .call b { color:var(--cyan); font-weight:600; }
-  .call .ok { margin-left:auto; color:var(--ok); font-weight:700; opacity:0; animation:fade .3s forwards; }
+  .call .r { color:#9fb0d6; }
+  .call .ok { margin-left:auto; color:var(--ok); font-weight:800; opacity:0; animation:pop .3s forwards; }
   @keyframes slide { to { opacity:1; transform:none; } }
-  @keyframes fade { to { opacity:1; } }
-  .side h2 { font-size:84px; font-weight:800; letter-spacing:-3px; line-height:1.02; }
-  .side p { font-size:30px; color:var(--muted); margin-top:22px; line-height:1.4; }
-  .pill { display:inline-block; font-size:22px; font-weight:700; letter-spacing:4px; text-transform:uppercase; padding:10px 18px; border-radius:999px; background:rgba(63,208,255,.12); color:var(--cyan); margin-bottom:24px; }
-  /* approval */
-  .approval { width:900px; background:#fbfcff; color:#0e1726; border-radius:30px; padding:40px 48px; box-shadow:0 50px 140px rgba(0,0,0,.5); transform:translateY(60px) rotateX(18deg); opacity:0; animation:card 1s cubic-bezier(.2,.9,.2,1) forwards; }
+  @keyframes pop { from { opacity:0; transform:scale(.6);} to { opacity:1; transform:none; } }
+  .side h2 { font-size:92px; font-weight:850; letter-spacing:-4px; line-height:1; }
+  .side p { font-size:30px; color:var(--muted); margin-top:24px; line-height:1.4; opacity:0; animation:up .6s .9s forwards; }
+  .pill { display:inline-block; font-size:22px; font-weight:800; letter-spacing:5px; text-transform:uppercase; padding:10px 20px; border-radius:999px; background:rgba(63,208,255,.14); color:var(--cyan); margin-bottom:26px; }
+  /* footage */
+  .shot { position:absolute; left:120px; top:150px; width:1200px; height:750px; border-radius:24px; background:#0b1430; box-shadow:0 50px 160px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.14); }
+  .label { position:absolute; left:1390px; top:300px; width:430px; }
+  .label .k { font-size:22px; font-weight:800; letter-spacing:6px; text-transform:uppercase; color:var(--cyan); opacity:0; animation:up .5s .2s forwards; }
+  .label h3 { font-size:64px; font-weight:850; letter-spacing:-2px; line-height:1.02; margin-top:18px; opacity:0; animation:up .6s .35s forwards; }
+  .label p { font-size:26px; color:var(--muted); margin-top:20px; line-height:1.4; opacity:0; animation:up .6s .6s forwards; }
+  .fine { position:absolute; left:120px; bottom:56px; font-size:19px; color:#6f84b8; }
+  /* approve */
+  .approval { width:920px; background:#fbfcff; color:#0e1726; border-radius:30px; padding:42px 50px; box-shadow:0 60px 160px rgba(0,0,0,.55); opacity:0; transform:translateY(80px) scale(.94); animation:card .7s cubic-bezier(.2,.9,.2,1) forwards; position:relative; }
   @keyframes card { to { opacity:1; transform:none; } }
-  .approval h3 { font-size:40px; font-weight:800; }
-  .row { display:flex; justify-content:space-between; font-size:28px; padding:14px 0; border-bottom:1px solid #e3e8ef; }
+  .approval h3 { font-size:42px; font-weight:850; }
+  .row { display:flex; justify-content:space-between; font-size:29px; padding:14px 0; border-bottom:1px solid #e3e8ef; }
   .row span:first-child { color:#5b6576; }
   .btns { display:flex; gap:18px; margin-top:28px; }
-  .btn { font-size:28px; font-weight:700; padding:18px 36px; border-radius:16px; background:#e9eef7; }
-  .btn.primary { background:#0b5cff; color:#fff; animation:press 1.2s 2.4s forwards; }
-  @keyframes press { 30% { transform:scale(.94);} 60% { transform:scale(1); background:#0e8a5f; } 100% { background:#0e8a5f; } }
-  .hash { font-family:Consolas,monospace; font-size:21px; color:#8a94a6; margin-top:20px; }
-  .seal { position:absolute; right:-40px; top:-40px; width:150px; height:150px; border-radius:50%; background:#0e8a5f; color:#fff; display:grid; place-items:center; font-size:64px; transform:scale(0); animation:logo .6s 3s cubic-bezier(.2,1.6,.3,1) forwards; box-shadow:0 20px 60px rgba(14,138,95,.5); }
-  /* footage */
-  .reel { display:flex; gap:44px; align-items:center; }
-  .frame { width:960px; border-radius:26px; overflow:hidden; box-shadow:0 40px 140px rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.14); transform:perspective(1600px) rotateY(-8deg); animation:float 6s ease-in-out infinite alternate; }
-  @keyframes float { to { transform:perspective(1600px) rotateY(4deg) translateY(-14px); } }
-  .frame video { width:100%; display:block; }
-  .tags { display:grid; gap:20px; width:620px; }
-  .tag { font-size:34px; font-weight:700; padding:24px 30px; border-radius:22px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); opacity:0; animation:slide .5s forwards; }
-  .tag small { display:block; font-size:22px; color:var(--muted); font-weight:500; margin-top:6px; }
-  .fine { position:absolute; bottom:48px; font-size:20px; color:#7487b5; }
+  .btn { font-size:29px; font-weight:800; padding:18px 38px; border-radius:16px; background:#e9eef7; }
+  .btn.primary { background:#0b5cff; color:#fff; animation:press .9s 1.2s forwards; }
+  @keyframes press { 35% { transform:scale(.92);} 70% { transform:scale(1.03); background:#0e8a5f; } 100% { transform:none; background:#0e8a5f; } }
+  .hash { font-family:Consolas,monospace; font-size:21px; color:#8a94a6; margin-top:22px; }
+  .seal { position:absolute; right:-46px; top:-46px; width:150px; height:150px; border-radius:50%; background:#0e8a5f; color:#fff; display:grid; place-items:center; font-size:70px; transform:scale(0); animation:logo .5s 1.8s cubic-bezier(.2,1.6,.3,1) forwards; box-shadow:0 20px 70px rgba(14,138,95,.6); }
   /* features */
-  .feats { display:grid; grid-template-columns:repeat(3,480px); gap:30px; }
-  .feat { height:220px; border-radius:28px; padding:36px; background:linear-gradient(160deg,rgba(255,255,255,.1),rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.12); opacity:0; transform:translateY(40px); animation:pop .6s cubic-bezier(.2,.9,.3,1.2) forwards; display:flex; flex-direction:column; justify-content:flex-end; }
-  .feat i { font-style:normal; font-size:54px; margin-bottom:auto; }
-  .feat b { font-size:36px; }
-  .feat span { font-size:22px; color:var(--muted); margin-top:6px; }
+  .feats { display:grid; grid-template-columns:repeat(2,700px); gap:30px; }
+  .feat { height:190px; border-radius:30px; padding:36px 40px; background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.14); opacity:0; transform:translateY(50px) scale(.95); animation:pop2 .5s cubic-bezier(.2,.9,.3,1.2) forwards; display:flex; gap:30px; align-items:center; }
+  @keyframes pop2 { to { opacity:1; transform:none; } }
+  .feat i { font-style:normal; font-size:64px; width:100px; text-align:center; }
+  .feat b { font-size:44px; display:block; }
+  .feat span { font-size:24px; color:var(--muted); }
   /* stats */
-  .stats { display:flex; gap:70px; }
-  .stat { text-align:center; }
-  .stat b { display:block; font-size:170px; font-weight:900; letter-spacing:-6px; line-height:1; }
-  .stat span { font-size:30px; color:var(--muted); }
-  /* end */
-  .url { margin-top:44px; font-size:38px; font-weight:700; padding:18px 34px; border-radius:999px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); opacity:0; animation:up .7s 1.2s forwards; }
-  .flash { position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none; }
-  .flash.go { animation:flash .5s ease-out; }
-  @keyframes flash { 0% { opacity:.55; } 100% { opacity:0; } }
+  .stats { display:flex; gap:110px; }
+  .stat { text-align:center; opacity:0; animation:pop2 .5s forwards; }
+  .stat b { display:block; font-size:200px; font-weight:900; letter-spacing:-8px; line-height:1; }
+  .stat span { font-size:32px; color:var(--muted); }
+  .url { margin-top:46px; font-size:40px; font-weight:800; padding:18px 36px; border-radius:999px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); opacity:0; animation:up .6s 1s forwards; }
+  .sub { font-size:40px; color:var(--muted); margin-top:26px; opacity:0; animation:up .6s .55s forwards; }
+  #flash { position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none; }
 </style></head>
 <body>
 <div id="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div id="grid"></div></div>
-<div id="stage"></div>
-<div class="flash" id="flash"></div>
+<div id="stage"></div><div id="bar"></div><div id="flash"></div>
 <script>
-const S = document.getElementById('stage');
-const words = (t, d0 = 0, step = 0.12, cls = '') => t.split(' ').map((w, i) => `<span class="word ${cls}" style="animation-delay:${(d0 + i * step).toFixed(2)}s">${w}</span>`).join(' ');
-const flash = () => { const f = document.getElementById('flash'); f.classList.remove('go'); void f.offsetWidth; f.classList.add('go'); };
+const W = (t, d0 = 0, step = 0.11, cls = 'word') => t.split(' ').map((w, i) => `<span class="${cls}" style="animation-delay:${(d0 + i * step).toFixed(2)}s">${w}</span>`).join(' ');
+const SHOT = (k, h, p) => `<div class="shot"></div><div class="label"><div class="k">${k}</div><h3>${h}</h3><p>${p}</p></div><div class="fine">Recorded in BridgeWise · Alipay open-platform sandbox and Stripe test mode</div>`;
 const SCENES = {
-  hook: () => `<div class="big">${words('Every month,', 0.1)}<br>${words('students lose money', 0.6)}<br><span class="grad">${words('between two currencies.', 1.3, 0.14)}</span></div>`,
-  pain: () => `<div class="eyebrow">The student money problem</div><div class="pains">${[
-      ['Hidden FX margins', 'The fee hides inside the exchange rate'], ['Tuition deadlines', 'Large bills, fixed dates, living money at risk'],
-      ['New payment apps', 'Alipay, WeChat Pay, a local bank card'], ['No credit history', 'No 征信 record on arrival']]
-      .map(([a, b], i) => `<div class="pain" style="animation-delay:${0.3 + i * 1.5}s">${a}<span>${b}</span></div>`).join('')}</div>`,
-  logo: () => `<div class="ring"></div><div class="mark">BW</div><div class="name grad">${words('BridgeWise', 0.5)}</div>`,
-  agent: () => `<div class="agent"><div class="chat"><div class="chat-h"><div class="av">✦</div>BridgeWise Agent</div>
-      <div class="msg user" style="animation-delay:.2s">Pay my Tsinghua tuition invoice</div>
-      ${[['read_invoice', 'CNY 26,000 · due 15 Dec'], ['get_overview', '3 pockets · reserve kept'], ['get_fx', 'ECB live rate'], ['compare_live_providers', '17 providers quoted'], ['propose_bill_payment', 'card ready for you']]
-        .map(([n, r], i) => `<div class="call" style="animation-delay:${1 + i * 1.35}s"><span>⚙</span><b>${n}</b><span style="color:#9fb0d6">${r}</span><span class="ok" style="animation-delay:${1.5 + i * 1.35}s">✓</span></div>`).join('')}
-      <div class="msg bot" style="animation-delay:8.2s">Ready. Approve the card to set CNY 26,000 aside for Tsinghua.</div></div>
-      <div class="side"><div class="pill">Agentic AI</div><h2>${words('An agent that does the work.', 0.3, 0.1)}</h2><p style="opacity:0;animation:up .7s 1.2s forwards">Reads invoices, checks balances, pulls live rates, compares providers and prepares every payment, through real tool calls.</p></div></div>`,
-  approve: () => `<div class="eyebrow">It proposes. You approve.</div><div style="position:relative"><div class="approval"><h3>Set aside 26,000.00 CNY for Tsinghua University</h3>
+  hook: () => `<div class="big">${W('Your tuition is due.', 0.05)}<br>${W('Your rupees are losing value.', 1.9, 0.1)}<br><span class="hot">${W('Your bank hides the fee.', 4.2, 0.12, 'slam')}</span></div>`,
+  pain: () => `<div class="big gradw" style="font-size:150px">${W('Two currencies.', 0.05, 0.1, 'slam')}<br>${W('One deadline.', 1.5, 0.1, 'slam')}<br>${W('Zero room for error.', 2.9, 0.1, 'slam')}</div>`,
+  logo: () => `<div class="ring"></div><div class="mark"><img src="logo.svg" style="width:100%;height:100%;display:block"></div><div class="name gradw">${W('BridgeWise', 0.35, 0.1)}</div>`,
+  agent: () => `<div class="agent"><div class="chat"><div class="chat-h"><div class="av">✦</div>BridgeWise Agent<span class="live">tool calls</span></div>
+      <div class="msg user" style="animation-delay:.3s">Pay my Tsinghua tuition invoice</div>
+      ${[['read_invoice', 'CNY 26,000 · due 15 Dec'], ['get_overview', '3 pockets · reserve kept'], ['get_fx', 'ECB live rate'], ['compare_live_providers', '17 providers quoted'], ['propose_bill_payment', 'card ready']]
+        .map(([n, r], i) => `<div class="call" style="animation-delay:${2.2 + i * 2.1}s"><span>⚙</span><b>${n}</b><span class="r">${r}</span><span class="ok" style="animation-delay:${2.9 + i * 2.1}s">✓</span></div>`).join('')}
+      <div class="msg bot" style="animation-delay:12.8s">Ready: approve the card to set CNY 26,000 aside.</div></div>
+      <div class="side"><div class="pill">Agentic AI</div><h2>${W('Paste it. The agent does the rest.', 0.4, 0.09)}</h2><p>Real tool calls: invoice, balances, live rates, 17 providers, a payment ready to approve.</p></div></div>`,
+  card: () => SHOT('Real rails · Stripe', 'Top up by card.', 'The card field is Stripe’s own: the number never reaches BridgeWise. Credited only after Stripe confirms.'),
+  proposal: () => SHOT('The agent proposes', 'Every term, on one card.', 'Read from the invoice, priced at the live rate, checked against the money you live on.'),
+  approve: () => `<div class="eyebrow">You approve. Nothing else.</div><div class="approval"><h3>Set aside 26,000.00 CNY for Tsinghua</h3>
       <div class="row"><span>From</span><span>CNY pocket</span></div><div class="row"><span>Reference</span><span>2026080123</span></div><div class="row"><span>Left to live on</span><span>3,200.00 CNY</span></div>
-      <div class="btns"><div class="btn primary">✓ Approve</div><div class="btn">Decline</div></div><div class="hash">terms sha256 9f2c41e8a7… · nothing moves until you approve</div></div><div class="seal">✓</div></div>`,
-  rails: () => `<div class="reel"><div class="frame"><video id="v" muted autoplay playsinline src="out/clip-card_ok.webm"></video></div>
-      <div class="tags">${[['Alipay 支付宝', 'Top up on Alipay’s own cashier'], ['Bank card', 'Through Stripe; the number never reaches us'], ['Pay anyone in China', 'Straight into their Alipay, with your password']]
-        .map(([a, b], i) => `<div class="tag" style="animation-delay:${0.4 + i * 1.6}s">${a}<small>${b}</small></div>`).join('')}</div></div>
-      <div class="fine">Shown in the Alipay open-platform sandbox and Stripe test mode</div>`,
-  features: () => `<div class="feats">${[['💱', 'Every currency', 'Valued at live ECB rates'], ['🎓', 'Tuition set aside', 'Ring-fenced until it’s paid'], ['📊', 'Budget & runway', 'How long your money lasts'], ['🏦', 'Credit in China', '征信 · 芝麻信用 · 微信支付分'], ['🔍', '17 providers', 'The margin each one hides'], ['中', 'English & 中文', 'The whole app, both languages']]
-      .map(([e, a, b], i) => `<div class="feat" style="animation-delay:${0.2 + i * 0.75}s"><i>${e}</i><b>${a}</b><span>${b}</span></div>`).join('')}</div>`,
+      <div class="btns"><div class="btn primary">✓ Approve</div><div class="btn">Decline</div></div><div class="hash">sha256 9f2c41e8a7… · nothing moves until you approve</div><div class="seal">✓</div></div>`,
+  sent: () => SHOT('Real rails · Alipay', 'Paid into Alipay.', 'Alipay’s transfer API pays the account in China. Your password confirms every payout.'),
+  features: () => `<div class="feats">${[['💱', 'Every currency', 'Live ECB rates, fees shown first'], ['🎓', 'Every bill', 'Tuition set aside so it’s never spent'], ['📊', 'Your budget', 'Spending, runway, alerts'], ['🏦', 'Your credit in China', '征信 · 芝麻信用 · 微信支付分']]
+      .map(([e, a, b], i) => `<div class="feat" style="animation-delay:${0.15 + i * 1.3}s"><i>${e}</i><div><b>${a}</b><span>${b}</span></div></div>`).join('')}</div>`,
   secure: () => `<div class="eyebrow">Built like a bank</div><div class="stats">${[['269', 'automated tests'], ['37', 'attack tests'], ['0', 'actions without you']]
-      .map(([n, l], i) => `<div class="stat" style="opacity:0;animation:pop .6s ${0.2 + i * 0.5}s forwards"><b class="grad" data-to="${n}">0</b><span>${l}</span></div>`).join('')}</div>`,
-  end: () => `<div class="mark" style="width:160px;height:160px;border-radius:44px;font-size:66px">BW</div><div class="name grad" style="font-size:130px;margin-top:30px">${words('BridgeWise', 0.3)}</div>
-      <div class="sub">Your money, across borders, handled.</div><div class="url">bridgewise-azure.vercel.app</div>`,
+      .map(([n, l], i) => `<div class="stat" style="animation-delay:${0.15 + i * 1.4}s"><b class="grad" data-to="${n}" data-at="${0.15 + i * 1.4}">0</b><span>${l}</span></div>`).join('')}</div>`,
+  end: () => `<div class="mark" style="width:170px;height:170px;border-radius:46px;font-size:70px"><img src="logo.svg" style="width:100%;height:100%;display:block"></div><div class="name gradw" style="font-size:140px;margin-top:30px">${W('BridgeWise', 0.25)}</div>
+      <div class="sub">Money across borders. Handled.</div><div class="url">bridgewise-azure.vercel.app</div>`,
 };
-let current = null;
-function show(id, dur) {
-  if (current) { const old = current; old.classList.remove('in'); old.classList.add('out'); setTimeout(() => old.remove(), 600); }
-  const el = document.createElement('div');
-  el.className = 'scene';
-  el.innerHTML = SCENES[id]();
-  S.appendChild(el);
-  requestAnimationFrame(() => el.classList.add('in'));
-  current = el;
-  if (['logo', 'agent', 'rails', 'end'].includes(id)) flash();
-  if (id === 'rails') {
-    const v = el.querySelector('#v'); const clips = ['out/clip-card_ok.webm', 'out/clip-link_ok.webm', 'out/clip-sent.webm'];
-    let k = 0; const step = Math.max(2.6, dur / clips.length) * 1000;
-    const next = () => { k++; if (k < clips.length) { v.src = clips[k]; v.play(); setTimeout(next, step); } };
-    setTimeout(next, step);
+const FLASH = new Set(['logo', 'agent', 'card', 'approve', 'sent', 'end']);
+let plan = [], total = 0;
+const live = new Map();
+window.setup = (schedule, len) => { plan = schedule; total = len; };
+const clamp = (x) => Math.max(0, Math.min(1, x));
+const ease = (x) => 1 - Math.pow(1 - x, 3);
+/** Draws the frame at time t (seconds): which scenes exist, and every animation's position. */
+window.seek = (t) => {
+  for (const s of plan) {
+    const visible = t >= s.at && t < s.at + s.dur + 0.45;
+    let el = live.get(s.id);
+    if (visible && !el) { el = document.createElement('div'); el.className = 'scene'; el.innerHTML = SCENES[s.id](); document.getElementById('stage').appendChild(el); live.set(s.id, el); }
+    if (!visible && el) { el.remove(); live.delete(s.id); continue; }
+    if (!el) continue;
+    const local = t - s.at;
+    const inP = ease(clamp(local / 0.45)), outP = clamp((local - s.dur) / 0.45);
+    el.style.opacity = String(inP * (1 - outP));
+    el.style.transform = `scale(${(1.05 - 0.05 * inP) - 0.04 * outP})`;
+    for (const a of el.getAnimations({ subtree: true })) { a.pause(); a.currentTime = local * 1000; }
+    el.querySelectorAll('[data-to]').forEach((b) => { const p = ease(clamp((local - Number(b.dataset.at) - 0.2) / 1.3)); b.textContent = Math.round(Number(b.dataset.to) * p); });
   }
-  if (id === 'secure') el.querySelectorAll('[data-to]').forEach((b) => {
-    const to = Number(b.dataset.to); const t0 = performance.now();
-    const tick = (t) => { const p = Math.min(1, (t - t0) / 1600); b.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); };
-    requestAnimationFrame(tick);
-  });
-}
-window.play = (schedule) => { for (const s of schedule) setTimeout(() => show(s.id, s.dur), s.at * 1000); };
+  for (const a of document.getElementById('bg').getAnimations({ subtree: true })) { a.pause(); a.currentTime = t * 1000; }
+  const f = plan.filter((s) => FLASH.has(s.id) && t >= s.at && t < s.at + 0.35).length ? 1 - clamp((t - plan.find((s) => FLASH.has(s.id) && t >= s.at && t < s.at + 0.35).at) / 0.35) : 0;
+  document.getElementById('flash').style.opacity = String(f * 0.5);
+  document.getElementById('bar').style.width = `${(t / total) * 100}%`;
+};
 </script>
 </body></html>

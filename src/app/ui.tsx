@@ -360,3 +360,18 @@ export function Sheet({ title, onClose, children }: { title: string; onClose: ()
 export const CATEGORY_ICON: Record<string, string> = {
   tuition: 'cap', rent: 'home', food: 'food', transport: 'bus', bills: 'bill', shopping: 'bag', family: 'users', fx: 'swap', income: 'down', other: 'dot',
 };
+
+/** The BridgeWise mark: a suspension bridge spanning two currencies. */
+export function BrandMark({ size = 30 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true" className="brand-mark">
+      <defs><linearGradient id="bwg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#3b7bff" /><stop offset="1" stopColor="#7c4dff" /></linearGradient></defs>
+      <rect width="64" height="64" rx="16" fill="url(#bwg)" />
+      <path d="M12 41 Q32 9 52 41" fill="none" stroke="#fff" strokeWidth="4.5" strokeLinecap="round" />
+      <path d="M22 29.5V41M32 25V41M42 29.5V41" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" opacity=".85" />
+      <path d="M8 41H56" stroke="#fff" strokeWidth="4.5" strokeLinecap="round" />
+      <circle cx="12" cy="49" r="4.2" fill="#ffd166" />
+      <circle cx="52" cy="49" r="4.2" fill="#5ef0c9" />
+    </svg>
+  );
+}

@@ -9,7 +9,7 @@
  * card displayed.
  */
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Assistant, Icon, type ChatMsg, type Json } from './ui';
+import { Assistant, BrandMark, Icon, type ChatMsg, type Json } from './ui';
 import { Bills, Home, Markets, Onboarding, Wallet, api, type Ctx } from './views';
 import { Activity, AddMoney, Budget, RecordPayment, SendMoney } from './views2';
 import { Accounts } from './views3';
@@ -132,7 +132,7 @@ ${r.budgetNote}` : ''), steps: r.steps, proposals: r.proposals, mode: r.mode }])
   return (
     <div className="shell">
       <nav className="side" aria-label="Main">
-        <div className="logo"><span className="logo-mark">BW</span> BridgeWise</div>
+        <div className="logo"><BrandMark /> BridgeWise</div>
         <div className="nav">
           {TABS.map((t) => (
             <button key={t.id} onClick={() => setTab(t.id)} aria-current={tab === t.id ? 'page' : undefined}>
@@ -151,7 +151,7 @@ ${r.budgetNote}` : ''), steps: r.steps, proposals: r.proposals, mode: r.mode }])
       </nav>
 
       <div className="mobile-top">
-        <div className="logo" style={{ padding: 0 }}><span className="logo-mark">BW</span> BridgeWise</div>
+        <div className="logo" style={{ padding: 0 }}><BrandMark /> BridgeWise</div>
       </div>
 
       <main id="main" className="main">

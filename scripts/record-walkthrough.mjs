@@ -135,7 +135,7 @@ async function card(on, title = 'BridgeWise', sub = '', url = '') {
   await page.evaluate(([o, t, s, u]) => {
     let c = document.getElementById('__card');
     if (!c) { c = document.createElement('div'); c.id = '__card'; document.documentElement.appendChild(c); }
-    c.innerHTML = `<div class="mark">BW</div><h1>${t}</h1>${s ? `<p>${s}</p>` : ''}${u ? `<div class="url">${u}</div>` : ''}`;
+    c.innerHTML = `<div class="mark" style="background:none"><svg width="84" height="84" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b7bff"/><stop offset="1" stop-color="#7c4dff"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#g)"/><path d="M12 41 Q32 9 52 41" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/><path d="M22 29.5V41M32 25V41M42 29.5V41" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".85"/><path d="M8 41H56" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/><circle cx="12" cy="49" r="4.2" fill="#ffd166"/><circle cx="52" cy="49" r="4.2" fill="#5ef0c9"/></svg></div><h1>${t}</h1>${s ? `<p>${s}</p>` : ''}${u ? `<div class="url">${u}</div>` : ''}`;
     requestAnimationFrame(() => c.classList.toggle('on', o));
   }, [on, title, sub, url]);
   await pause(900);

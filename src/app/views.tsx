@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ApprovalCard, CcyBadge, Icon, Sparkline, money, type Json } from './ui';
+import { ApprovalCard, BrandMark, CcyBadge, Icon, Sparkline, money, type Json } from './ui';
 import { TxRow } from './views2';
 
 export const CURRENCIES = ['GBP', 'USD', 'EUR', 'CNY', 'PKR', 'INR', 'AUD', 'CAD', 'JPY', 'KRW', 'AED'];
@@ -58,7 +58,7 @@ export function Onboarding({ onDone }: { onDone: () => void }) {
   return (
     <div className="auth">
       <section className="auth-brand">
-        <div className="logo" style={{ padding: 0 }}><span className="logo-mark">BW</span> BridgeWise</div>
+        <div className="logo" style={{ padding: 0 }}><BrandMark /> BridgeWise</div>
         <div className="auth-pitch">
           <h1>Your money, across borders, handled.</h1>
           <p>The money account for international students: every currency you live in, paid in and out through Alipay and your bank card, with an AI assistant that prepares every payment and never moves money without you.</p>

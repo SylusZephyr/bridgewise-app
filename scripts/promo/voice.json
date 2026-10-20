@@ -1,11 +1,13 @@
 {
-  "hook": "Every month, international students *lose money*, between two currencies.",
-  "pain": "Hidden exchange margins. Tuition deadlines. New payment apps. No credit history.",
-  "logo": "Meet BridgeWise.",
-  "agent": "An AI agent that *does the work*. It reads your invoice, checks your balances, pulls live rates, compares *seventeen* providers, and prepares the payment.",
-  "approve": "But it *never* moves money on its own. Every action is a card *you* approve, sealed with a fingerprint of its exact terms.",
-  "rails": "Money moves on *real* rails. Top up with Alipay or your card. Pay anyone in China, straight into their Alipay.",
-  "features": "Every currency you live in, valued live. Tuition set aside so it is never spent. Budgets, runway, and a plan to build credit in China.",
-  "secure": "Built like a bank, and attacked by its own tests on every release.",
-  "end": "BridgeWise. Your money, across borders, *handled*."
+  "hook": "Your tuition is due. Your rupees are losing value. And your bank is *hiding the fee*.",
+  "pain": "Two currencies. One deadline. Zero room for error.",
+  "logo": "BridgeWise.",
+  "agent": "Paste the invoice. The agent takes it from there. It reads it. Checks your money. Pulls live rates. Compares *seventeen* providers. And builds the payment.",
+  "card": "Real money. Real rails. Top up by card, through Stripe.",
+  "proposal": "The agent proposes. Every term, on one card.",
+  "approve": "And *nothing* moves until you say so.",
+  "sent": "Approved. Straight into an Alipay account in China.",
+  "features": "Every currency. Every bill. Your budget. Your credit in China.",
+  "secure": "Two hundred and sixty nine tests. Thirty seven of them are *attacks*.",
+  "end": "BridgeWise. Money across borders. *Handled*."
 }

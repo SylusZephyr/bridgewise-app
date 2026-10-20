@@ -366,3 +366,6 @@ label { font-weight: 600; font-size: .82rem; color: var(--muted); margin-bottom:
   .tx-icon.cat-food, .tx-icon.cat-shopping { background: #2e2311; color: #f0b056; }
   .tx-icon.cat-family, .tx-icon.cat-rent, .tx-icon.cat-tuition, .tx-icon.cat-bills { background: #221a3d; color: #b69cff; }
 }
+
+.brand-mark { flex: none; border-radius: 9px; box-shadow: 0 2px 8px rgba(59,123,255,.35); }
+.auth-brand .brand-mark { width: 40px; height: 40px; }
