@@ -137,7 +137,7 @@ export function Home({ data, ask, approve, decline, approving, go, sheet }: Ctx)
         <section className="card balance-hero">
           <div className="label">Total across your pockets</div>
           <div className="big num">{money(w.totalInDisplay, w.displayCurrency)}</div>
-          <div className="sub">Indicative · live rates from {w.rates?.source ?? 'market data'}</div>
+          <div className="sub">Valued at today’s live exchange rates</div>
           <div className="actions">
             <button className="btn ghost small" onClick={() => sheet('add')}><Icon name="down" size={14} /> Add money</button>
             <button className="btn ghost small" onClick={() => go('send')}><Icon name="send" size={14} /> Send</button>

@@ -56,7 +56,7 @@ const ZH: Record<string, string> = {
   'Total across your pockets': '所有账户合计', 'Add money': '充值', 'Convert': '换汇', 'Pockets': '货币账户', 'Manage': '管理', 'BridgeWise noticed': 'BridgeWise 提醒您',
   'Updated just now': '刚刚更新', 'Waiting for your approval': '等待您批准', 'Upcoming bills': '即将到期的账单', 'Add bill': '添加账单', 'Recent transactions': '最近交易',
   'See all': '查看全部', 'Nothing yet.': '暂无记录。', 'Statement': '流水', 'Convert between pockets': '账户间换汇', 'Live rate · 0.30% fee, shown up front': '实时汇率 · 0.30% 手续费，提前显示',
-  'Indicative · live rates from': '参考值 · 实时汇率来源：', 'Explain': '解释', 'Analyse': '分析', 'Plan': '规划', 'Prepare payment': '准备付款',
+  'Valued at today’s live exchange rates': '按今日实时汇率估值', 'Explain': '解释', 'Analyse': '分析', 'Plan': '规划', 'Prepare payment': '准备付款',
   'Display currency': '显示货币', 'Rate unavailable': '汇率暂不可用', 'Getting quote…': '正在报价…', 'Get quote': '获取报价',
   // bills
   'Add a bill from your invoice': '从账单添加', 'Read by parser, checked by you': '由解析器读取，由您核对', 'Invoice text': '账单文本', 'Let the assistant handle it': '交给助手处理',

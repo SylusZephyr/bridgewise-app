@@ -86,7 +86,7 @@ try {
   await stripe.getByPlaceholder('1234 1234 1234 1234').pressSequentially('4242424242424242', { delay: 40 });
   await stripe.getByPlaceholder('MM / YY').pressSequentially('1230', { delay: 60 });
   await stripe.getByPlaceholder('CVC').pressSequentially('123', { delay: 60 });
-  const zip = stripe.getByPlaceholder(/ZIP|Postal/i);
+  const zip = stripe.getByLabel(/ZIP|Postal/i);
   if (await zip.count()) await zip.first().pressSequentially('10001', { delay: 40 });
   await pause(1200);
   await page.getByRole('button', { name: /^Pay 800\.00 CNY$/ }).click();
